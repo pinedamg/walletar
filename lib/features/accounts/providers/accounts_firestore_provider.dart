@@ -15,6 +15,25 @@ class AccountsRepository {
         .add(accountData);
   }
 
+  Future<void> deleteAccount(String userId, String accountId) async {
+    await _firestore
+        .collection('users')
+        .doc(userId)
+        .collection('accounts')
+        .doc(accountId)
+        .delete();
+  }
+
+  Future<void> updateAccount(
+      String userId, String accountId, Map<String, dynamic> updatedData) async {
+    await _firestore
+        .collection('users')
+        .doc(userId)
+        .collection('accounts')
+        .doc(accountId)
+        .update(updatedData);
+  }
+
   Stream<List<Account>> getAccounts(String userId) {
     return _firestore
         .collection('users')
