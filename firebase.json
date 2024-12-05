@@ -1,9 +1,1 @@
-{
-  "firestore": {
-    "rules": "firestore.rules",
-    "indexes": "firestore.indexes.json"
-  },
-  "database": {
-    "rules": "database.rules.json"
-  }
-}
+{"firestore":{"rules":"firestore.rules","indexes":"firestore.indexes.json"},"database":{"rules":"database.rules.json"},"flutter":{"platforms":{"android":{"default":{"projectId":"walletar-app","appId":"1:601778585822:android:8e5cfe94b613f79d8dc24f","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"walletar-app","configurations":{"android":"1:601778585822:android:8e5cfe94b613f79d8dc24f","ios":"1:601778585822:ios:104f0187591b03cb8dc24f","macos":"1:601778585822:ios:104f0187591b03cb8dc24f","web":"1:601778585822:web:e49547d207f40eab8dc24f","windows":"1:601778585822:web:724abe8d9c814f3b8dc24f"}}}}}}
