@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:walletar/features/accounts/models/account_model.dart';
 import 'package:walletar/features/accounts/screens/add_account_screen.dart';
+import 'package:walletar/features/accounts/screens/edit_account_screen.dart';
 import 'package:walletar/features/auth/screens/login_screen.dart';
 import 'package:walletar/features/auth/screens/register_screen.dart';
 import 'package:walletar/features/main/screens/home_screen.dart';
@@ -28,6 +29,13 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/add-account',
         builder: (context, state) => AddAccountScreen(),
+      ),
+      GoRoute(
+        path: '/edit-account',
+        builder: (context, state) {
+          final account = state.extra as Account; // Recibir el objeto cuenta
+          return EditAccountScreen(account: account);
+        },
       ),
     ],
   );
