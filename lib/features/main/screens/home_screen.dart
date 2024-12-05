@@ -48,9 +48,56 @@ class HomeScreen extends ConsumerWidget {
               final account = accounts[index];
               return ListTile(
                 title: Text(account.name),
-                // subtitle: Text('Saldo: \$${account.balance}'),
                 subtitle:
                     Text('Saldo: \$${account.balance.toStringAsFixed(2)}'),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.edit, color: Colors.blue),
+                      onPressed: () {
+                        context.push('/edit-account',
+                            extra: account); // Navegar a la pantalla de edición
+                      },
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.delete, color: Colors.red),
+                      onPressed: () async {
+                        final confirm = await showDialog<bool>(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text('Confirmar eliminación'),
+                              content: Text(
+                                  '¿Estás seguro de que deseas eliminar la cuenta "${account.name}"?'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(context, false),
+                                  child: const Text('Cancelar'),
+                                ),
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context, true),
+                                  child: const Text('Eliminar'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+
+                        if (confirm == true) {
+                          await ref
+                              .read(accountsRepositoryProvider)
+                              .deleteAccount(user.uid, account.id);
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Cuenta eliminada')),
+                          );
+                        }
+                      },
+                    ),
+                  ],
+                ),
               );
             },
           );
